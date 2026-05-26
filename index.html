@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fotosynthese & Zellatmung – Drag & Drop Trainer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom right, #dff6dd, #eef7ff);
+      margin: 0;
+      padding: 20px;
+      color: #222;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      background: white;
+      border-radius: 18px;
+      padding: 25px;
+      box-shadow: 0 5px 18px rgba(0,0,0,0.15);
+    }
+
+    h1 {
+      text-align: center;
+      color: #2c7a2c;
+    }
+
+    h2 {
+      color: #2455a6;
+      margin-top: 40px;
+    }
+
+    p {
+      line-height: 1.5;
+    }
+
+    .word-bank {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 20px 0;
+      padding: 15px;
+      background: #f4f7fb;
+      border-radius: 12px;
+    }
+
+    .draggable {
+      padding: 10px 14px;
+      background: #2f80ed;
+      color: white;
+      border-radius: 10px;
+      cursor: grab;
+      user-select: none;
+      font-weight: bold;
+    }
+
+    .equation {
+      font-size: 1.2rem;
+      line-height: 2.5;
+      margin-top: 20px;
+    }
+
+    .coef {
+      width: 60px;
+      padding: 6px;
+      font-size: 1rem;
+      text-align: center;
+      border: 2px solid #999;
+      border-radius: 8px;
+      margin: 0 4px;
+    }
+
+    .dropzone {
+      display: inline-block;
+      min-width: 90px;
+      min-height: 35px;
+      border: 2px dashed #888;
+      border-radius: 8px;
+      background: #fafafa;
+      text-align: center;
+      vertical-align: middle;
+      margin: 0 4px;
+      padding: 5px;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      background: #2f80ed;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d66c1;
+    }
+
+    .result {
+      margin-top: 15px;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .correct {
+      color: green;
+    }
+
+    .wrong {
+      color: red;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      color: #555;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌿 Drag-&-Drop-Trainer: Fotosynthese & Zellatmung 🔬</h1>
+
+    <p>
+      Ziehe die passenden Formeln und Begriffe auf die richtigen Platzhalter.
+      Ergänze die Gleichungen der Fotosynthese und Zellatmung.
+    </p>
+
+    <h2>Begriffesammlung</h2>
+
+    <div class="word-bank" id="wordBank">
+      <div class="draggable" draggable="true" id="CO2">CO₂</div>
+      <div class="draggable" draggable="true" id="H2O">H₂O</div>
+      <div class="draggable" draggable="true" id="O2">O₂</div>
+      <div class="draggable" draggable="true" id="C6H12O6">C₆H₁₂O₆</div>
+      <div class="draggable" draggable="true" id="endotherme">endotherme</div>
+      <div class="draggable" draggable="true" id="exotherme">exotherme</div>
+    </div>
+
+    <h2>1. Fotosynthese</h2>
+
+    <div class="equation">
+      <input class="coef" id="f1" type="number" min="1"> 
+      <span class="dropzone" data-answer="CO₂"></span>
+      + 
+      <input class="coef" id="f2" type="number" min="1"> 
+      <span class="dropzone" data-answer="H₂O"></span>
+      + Lichtenergie
+      →
+      <input class="coef" id="f3" type="number" min="1"> 
+      <span class="dropzone" data-answer="C₆H₁₂O₆"></span>
+      + 
+      <input class="coef" id="f4" type="number" min="1"> 
+      <span class="dropzone" data-answer="O₂"></span>
+      <br><br>
+      Die Fotosynthese ist eine
+      <span class="dropzone" data-answer="endotherme"></span>
+      Reaktion.
+    </div>
+
+    <h2>2. Zellatmung</h2>
+
+    <div class="equation">
+      <input class="coef" id="z1" type="number" min="1"> 
+      <span class="dropzone" data-answer="C₆H₁₂O₆"></span>
+      + 
+      <input class="coef" id="z2" type="number" min="1"> 
+      <span class="dropzone" data-answer="O₂"></span>
+      →
+      <input class="coef" id="z3" type="number" min="1"> 
+      <span class="dropzone" data-answer="CO₂"></span>
+      + 
+      <input class="coef" id="z4" type="number" min="1"> 
+      <span class="dropzone" data-answer="H₂O"></span>
+      + Energie
+      <br><br>
+      Die Zellatmung ist eine
+      <span class="dropzone" data-answer="exotherme"></span>
+      Reaktion.
+    </div>
+
+    <button onclick="checkAnswers()">Überprüfen</button>
+
+    <div id="result" class="result"></div>
+
+    <footer>
+      Interaktiver Biologie-Trainer – Fotosynthese & Zellatmung
+    </footer>
+  </div>
+
+  <script>
+    const draggables = document.querySelectorAll('.draggable');
+    const dropzones = document.querySelectorAll('.dropzone');
+
+    draggables.forEach(item => {
+      item.addEventListener('dragstart', dragStart);
+    });
+
+    dropzones.forEach(zone => {
+      zone.addEventListener('dragover', dragOver);
+      zone.addEventListener('drop', drop);
+    });
+
+    function dragStart(e) {
+      e.dataTransfer.setData('text', e.target.innerText);
+    }
+
+    function dragOver(e) {
+      e.preventDefault();
+    }
+
+    function drop(e) {
+      e.preventDefault();
+      const data = e.dataTransfer.getData('text');
+      e.target.innerText = data;
+    }
+
+    function checkAnswers() {
+      let allCorrect = true;
+
+      dropzones.forEach(zone => {
+        if (zone.innerText === zone.dataset.answer) {
+          zone.style.borderColor = 'green';
+        } else {
+          zone.style.borderColor = 'red';
+          allCorrect = false;
+        }
+      });
+
+      const coefficients = {
+        f1: '6',
+        f2: '6',
+        f3: '1',
+        f4: '6',
+        z1: '1',
+        z2: '6',
+        z3: '6',
+        z4: '6'
+      };
+
+      for (const id in coefficients) {
+        const input = document.getElementById(id);
+
+        if (input.value === coefficients[id]) {
+          input.style.borderColor = 'green';
+        } else {
+          input.style.borderColor = 'red';
+          allCorrect = false;
+        }
+      }
+
+      const result = document.getElementById('result');
+
+      if (allCorrect) {
+        result.innerHTML = '✅ Super! Alles richtig gemacht.';
+        result.className = 'result correct';
+      } else {
+        result.innerHTML = '❌ Überprüfe die Formelgleichungen nochmal.';
+        result.className = 'result wrong';
+      }
+    }
+  </script>
+</body>
+</html>
