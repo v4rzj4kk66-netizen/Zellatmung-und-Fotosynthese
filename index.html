@@ -128,8 +128,8 @@
     <h1>🌿 Drag-&-Drop-Trainer: Fotosynthese & Zellatmung 🔬</h1>
 
     <p>
-      Ziehe die passenden Formeln und Begriffe auf die richtigen Platzhalter der Formelgleichung.
-      Gleiche die Formelgleichung der Fotosynthese und Zellatmung aus.
+      Ziehe die passenden Formeln und Begriffe auf die richtigen Platzhalter.
+      Ergänze die Gleichungen der Fotosynthese und Zellatmung.
     </p>
 
     <h2>Begriffesammlung</h2>
@@ -151,6 +151,7 @@
       + 
       <input class="coef" id="f2" type="number" min="1"> 
       <span class="dropzone" data-answer="H₂O"></span>
+      
       →
       <input class="coef" id="f3" type="number" min="1"> 
       <span class="dropzone" data-answer="C₆H₁₂O₆"></span>
@@ -177,6 +178,7 @@
       + 
       <input class="coef" id="z4" type="number" min="1"> 
       <span class="dropzone" data-answer="H₂O"></span>
+      
       <br><br>
       Die Zellatmung ist eine
       <span class="dropzone" data-answer="exotherme"></span>
@@ -256,7 +258,7 @@
       const result = document.getElementById('result');
 
       if (allCorrect) {
-        result.innerHTML = '✅ Super! Alles richtig gemacht.';
+        result.innerHTML = '✅ Super! Alles richtig.';
         result.className = 'result correct';
       } else {
         result.innerHTML = '❌ Überprüfe die Formelgleichungen nochmal.';
